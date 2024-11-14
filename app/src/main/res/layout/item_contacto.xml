@@ -1,40 +1,40 @@
-<!-- res/layout/item_contacto.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/contactoFoto"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/fotoImageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/icono" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingStart="8dp">
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/contactoNombre"
+            android:id="@+id/nombreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Nombre Apellidos" />
+            android:text="Nombre Apellido"
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/contactoEmail"
+            android:id="@+id/emailTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="email@ejemplo.com" />
 
         <TextView
-            android:id="@+id/contactoTelefono"
+            android:id="@+id/telefonoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123456789" />
     </LinearLayout>
 </LinearLayout>
+

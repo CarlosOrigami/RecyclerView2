@@ -1,40 +1,46 @@
-package com.example.martes12;
-
+package com.example.martes12;// ContactoAdapter.java
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.martes12.Contacto;
-
 import java.util.List;
 
 public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.ContactoViewHolder> {
 
-    private List<Contacto> contactos;
+    private final List<Contacto> contactos;
+    private final Context context;
 
-    public ContactoAdapter(List<Contacto> contactos) {
+    public ContactoAdapter(List<Contacto> contactos, Context context) {
         this.contactos = contactos;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ContactoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_contacto, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contacto, parent, false);
         return new ContactoViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ContactoViewHolder holder, int position) {
         Contacto contacto = contactos.get(position);
-        holder.contactoFoto.setImageResource(contacto.getFoto());
-        holder.contactoNombre.setText(contacto.getNombre() + " " + contacto.getApellidos());
-        holder.contactoEmail.setText(contacto.getEmail());
-        holder.contactoTelefono.setText(contacto.getTelefono());
+        holder.nombreTextView.setText(contacto.getNombre() + " " + contacto.getApellidos());
+        holder.emailTextView.setText(contacto.getEmail());
+        holder.telefonoTextView.setText(contacto.getTelefono());
+        holder.fotoImageView.setImageResource(contacto.getFoto());
+
+        // Añadimos el evento de clic para cada elemento
+        holder.itemView.setOnClickListener(v -> {
+            String info = "Nombre: " + contacto.getNombre() + "\nEmail: " + contacto.getEmail() +
+                    "\nTeléfono: " + contacto.getTelefono();
+            Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
+        });
     }
 
     @Override
@@ -43,15 +49,15 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
     }
 
     static class ContactoViewHolder extends RecyclerView.ViewHolder {
-        ImageView contactoFoto;
-        TextView contactoNombre, contactoEmail, contactoTelefono;
+        TextView nombreTextView, emailTextView, telefonoTextView;
+        ImageView fotoImageView;
 
         public ContactoViewHolder(@NonNull View itemView) {
             super(itemView);
-            contactoFoto = itemView.findViewById(R.id.contactoFoto);
-            contactoNombre = itemView.findViewById(R.id.contactoNombre);
-            contactoEmail = itemView.findViewById(R.id.contactoEmail);
-            contactoTelefono = itemView.findViewById(R.id.contactoTelefono);
+            nombreTextView = itemView.findViewById(R.id.nombreTextView);
+            emailTextView = itemView.findViewById(R.id.emailTextView);
+            telefonoTextView = itemView.findViewById(R.id.telefonoTextView);
+            fotoImageView = itemView.findViewById(R.id.fotoImageView);
         }
     }
 }
